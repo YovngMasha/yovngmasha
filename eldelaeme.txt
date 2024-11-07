@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Servicios de Yovng Masha, artista y productor musical.">
+    <meta name="keywords" content="Yovng Masha, servicios musicales, beats, productor, organizador de eventos">
+    <title>Yovng Masha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Urbanist', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #800080; /* Cambiado a morado fuerte */
+            color: #d7bde2;
+        }
+        /* ... (resto de tu CSS) ... */
+        #redes-sociales {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        #redes-sociales a {
+            margin: 0 10px;
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        #redes-sociales a:hover {
+            color: #ff69B4; /* Color al pasar el ratón */
+        }
+        #producer-cart {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            max-height: 80vh; /* Limitar altura */
+            overflow-y: auto; /* Agregar desplazamiento */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#servicios">Servicios</a>
+        <a href="#merch">Merch</a>
+        <a href="#beats">Beats</a>
+        <a href="#contacto">Contacto</a>
+        <a href="#about">Acerca de</a>
+        <a href="#cart" id="cart-link" onclick="toggleCart()">Carrito (<span id="cart-count">0</span>)</a>
+    </nav>
+    <div class="container">
+        <img src="logoM.png" alt="Logo de Yovng Masha" class="logo">
+        <h1>Yovng Masha</h1>
+        <p>What's up THIS IS THE ONE OF THE M.</p>
+
+        <section id="servicios">
+            <h2>WHAT ARE YOU DOING?</h2>
+            <div class="services">
+                <div class="service-item">
+                    <h3>Beatmaker</h3>
+                    <p>Produzco beats únicos para artistas de todos los géneros.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Producer</h3>
+                    <p>Ofrezco servicios de producción musical, mezcla, masterización y sesión completa.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Events Manager</h3>
+                    <p>Organizo eventos donde artistas y DJ's se dan a conocer mostrando su arte.</p>
+                </div>
+                <div class="service-item">
+                    <h3>YovngMasha</h3>
+                    <p>Colaboraciones y proyectos artísticos.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Designer</h3>
+                    <p>Diseño portadas musicales, videos, logotipos.</p>
+                </div>
+                <div class="service-item">
+                    <h3>GodRecords</h3>
+                    <p>Sello discográfico.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="producer">
+            <h2>Servicios de Producción</h2>
+            <select id="producer-select">
+                <option value="Mezcla & Masterización">Mezcla & Masterización</option>
+                <option value="Mezcla, Masterización & Grabación de voces">Mezcla, Masterización & Grabación de voces</option>
+                <option value="Sesión completa">Sesión completa</option>
+            </select>
+            <input type="date" id="producer-date" />
+            <button id="reserve-button" onclick="reserveDateAndPay()">Apartar Fecha y Pagar 50%</button>
+            <div id="reservation-message"></div>
+        </section>
+
+        <section id="beats">
+            <h2>Beat Shop</h2>
+            <p>Beats únicos, ideales para artistas de todos los géneros. Cada beat diseñado para inspirar y elevar tu música.</p>
+            <div class="beats-container">
+                <div class="beat-card">
+                    <h3>DIDIDI</h3>
+                    <audio id="DIDIDI" preload="none" controls>
+                        <source src="./OPO.wav" type="audio/mpeg">
+                        Tu navegador no soporta el audio.
+                    </audio>
+                    <p class="price">Precio: $499.99 MXN</p>
+                    <button onclick="addToCart('DIDIDI', 499.99)">Agregar al carrito</button>
+                    <button onclick="downloadBeat('OPO.wav')" id="download-DIDIDI" style="display: none;">Descargar Beat</button>
+                </div>
+                <div class="beat-card">
+                    <h3>Ramon</h3>
+                    <audio id="Ramon" preload="none" controls>
+                        <source src="./zaza.wav" type="audio/mpeg">
+                        Tu navegador no soporta el audio.
+                    </audio>
+                    <p class="price">Precio: $299.99 MXN</p>
+                    <button onclick="addToCart('Ramon', 299.99)">Agregar al carrito</button>
+                    <button onclick="downloadBeat('Ramon.wav')" id="download-Ramon" style="display: none;">Descargar Beat</button>
+                </div>
+                <div class="beat-card">
+                    <h3>FANTA</h3>
+                    <audio id="Fanta" preload="none" controls>
+                        <source src="./FANTA.wav" type="audio/mpeg">
+                        Tu navegador no soporta el audio.
+                    </audio>
+                    <p class="price">Precio: $799.99 MXN</p>
+                    <button onclick="addToCart('FANTA', 799.99)">Agregar al carrito</button>
+                    <button onclick="downloadBeat('TAXIBEAT.wav')" id="download-FANTA" style="display: none;">Descargar Beat</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="merch">
+            <h2>Merch</h2>
+            <div class="merch">
+                <div class="merch-item">
+                    <img src="playeramasha.jpg" alt="YMGUN T-SHIRT" style="width: 100%; border-radius: 4px;">
+                    <h3>YMGUN T-SHIRT</h3>
+                    <p>Precio: $299.99 MXN</p>
+                    <button onclick="addToCart('Camisa Yovng Masha', 299.99)">Agregar al carrito</button>
+                </div>
+                <div class="merch-item">
+                    <img src="sudaderamasha.jpg" alt="YMGUN HOODIE" style="width: 100%; border-radius: 4px;">
+                    <h3>YMGUN HOODIE</h3>
+                    <p>Precio: $449.99 MXN</p>
+                    <button onclick="addToCart('HOODIE Yovng Masha', 449.99)">Agregar al carrito</button>
+                </div>
+                <div class="merch-item">
+                    <img src="vdhplayera.jpg" alt="VDHGUN T-SHIRT" style="width: 100%; border-radius: 4px;">
+                    <h3>VDHGUN T-SHIRT</h3>
+                    <p>Precio: $299.99 MXN</p>
+                    <button onclick="addToCart('Camisa VDH', 299.99)">Agregar al carrito</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección de redes sociales -->
+        <section id="redes-sociales">
+            <h2>Síguenos en Redes Sociales</h2>
+            <div>
+                <a href="https://www.instagram.com/yovngmasha" target="_blank">Instagram</a>
+                <a href="https://open.spotify.com/intl-es/artist/6nWmpNQeQJ73sXtg3MoFg6" target="_blank">Spotify</a>
+                <a href="https://twitter.com/yovngmasha" target="_blank">Twitter</a>
+                <a href="https://www.youtube.com/c/yovngmasha" target="_blank">YouTube</a>
+            </div>
+        </section>
+    </div>
+
+    <div id="cart">
+        <h3>Tu Carrito</h3>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <button onclick="checkout()">Proceder al pago</button>
+        <button onclick="toggleCart()">Cerrar</button>
+    </div>
+
+    <div id="producer-cart">
+        <h3>Carrito de Producción</h3>
+        <ul id="producer-cart-items"></ul>
+        <p>Total: $<span id="producer-cart-total">0.00</span></p>
+        <button onclick="checkoutProducer()">Proceder al pago</button>
+        <button onclick="toggleProducerCart()">Cerrar</button>
+    </div>
+
+    <footer>
+        <p>© 2023 Yovng Masha. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AerGLNGHIHIp93TUu0plV6K8jO2q6SitOjisYDPUcB6kjeuqP7bXjnSQloHFkigHa5eoQod7436RStO-"></script>
+    <script>
+        const cart = [];
+        let cartTotal = 0;
+        const producerCart = [];
+        let producerCartTotal = 0;
+
+        function addToCart(itemName, itemPrice) {
+            cart.push({ name: itemName, price: itemPrice });
+            cartTotal += itemPrice;
+            document.getElementById('cart-count').innerText = cart.length;
+            document.getElementById('cart-total').innerText = cartTotal.toFixed(2);
+
+            const cartItemsList = document.getElementById('cart-items');
+            const listItem = document.createElement('li');
+            listItem.innerText = `${itemName} - $${itemPrice.toFixed(2)}`;
+            cartItemsList.appendChild(listItem);
+        }
+
+        function addToProducerCart(itemName, itemPrice, selectedDate) {
+            producerCart.push({ name: itemName, price: itemPrice, date: selectedDate });
+            producerCartTotal += itemPrice;
+            document.getElementById('producer-cart-total').innerText = producerCartTotal.toFixed(2);
+
+            const producerCartItemsList = document.getElementById('producer-cart-items');
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `${itemName} - $${itemPrice.toFixed(2)} (Fecha: ${selectedDate.toLocaleDateString()}) <button onclick="removeFromProducerCart('${itemName}')">Eliminar</button>`;
+            producerCartItemsList.appendChild(listItem);
+        }
+
+        function removeFromProducerCart(itemName) {
+            const itemIndex = producerCart.findIndex(item => item.name === itemName);
+            if (itemIndex > -1) {
+                producerCartTotal -= producerCart[itemIndex].price;
+                producerCart.splice(itemIndex, 1);
+                document.getElementById('producer-cart-total').innerText = producerCartTotal.toFixed(2);
+                updateProducerCartDisplay();
+            }
+        }
+
+        function updateProducerCartDisplay() {
+            const producerCartItemsList = document.getElementById('producer-cart-items');
+            producerCartItemsList.innerHTML = '';
+            producerCart.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `${item.name} - $${item.price.toFixed(2)} (Fecha: ${item.date.toLocaleDateString()}) <button onclick="removeFromProducerCart('${item.name}')">Eliminar</button>`;
+                producerCartItemsList.appendChild(listItem);
+            });
+        }
+
+        function toggleCart() {
+            const cartElement = document.getElementById('cart');
+            cartElement.style.display = cartElement.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleProducerCart() {
+            const producerCartElement = document.getElementById('producer-cart');
+            producerCartElement.style.display = producerCartElement.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function downloadBeat(beatFile) {
+            const link = document.createElement('a');
+            link.href = beatFile;
+            link.download = beatFile;
+            link.click();
+        }
+
+        function checkout() {
+            // Implementar el proceso de pago aquí
+        }
+
+        function checkoutProducer() {
+            // Implementar el proceso de pago para el carrito de producción aquí
+        }
+
+        function reserveDateAndPay() {
+            const dateInput = document.getElementById('producer-date').value;
+            const selectedService = document.getElementById('producer-select').value;
+
+            const fullPrice = {
+                "Mezcla & Masterización": 399.99,
+                "Mezcla, Masterización & Grabación de voces": 599.99,
+                "Sesión completa": 999.99
+            }[selectedService];
+
+            const deposit = (fullPrice / 2).toFixed(2);
+            const selectedDate = new Date(dateInput);
+            const today = new Date();
+
+            if (selectedDate < today) {
+                alert('Por favor, selecciona una fecha válida que no esté en el pasado.');
+                return;
+            }
+
+            addToProducerCart(selectedService, deposit, selectedDate); // Agregar al carrito de producción
+
+            if (dateInput) {
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: deposit
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            document.getElementById('reservation-message').innerText = 
+                                `¡Pago exitoso! Has apartado la fecha ${selectedDate.toLocaleDateString()} para el servicio de ${selectedService} con un depósito de $${deposit} MXN.`;
+                        });
+                    },
+                    onCancel: function(data) {
+                        alert('Pago cancelado.');
+                    },
+                    onError: function(err) {
+                        alert('Ocurrió un error en el pago.');
+                    }
+                }).render('#cart'); // Asegúrate de que el contenedor con este ID esté presente
+            } else {
+                alert('Por favor, selecciona una fecha.');
+            }
+        }
+    </script>
+</body>
+
